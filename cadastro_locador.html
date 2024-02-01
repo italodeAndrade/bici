@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Cadastro</title>
+    <script>
+        function validarDataNascimento() {
+            var dataNascimento = document.forms["form1"]["dt_nascimento"].value;
+            var hoje = new Date();
+            var dataNascimentoDate = new Date(dataNascimento);
+
+            var idade = hoje.getFullYear() - dataNascimentoDate.getFullYear();
+
+            if (hoje.getMonth() < dataNascimentoDate.getMonth() || (hoje.getMonth() === dataNascimentoDate.getMonth() && hoje.getDate() < dataNascimentoDate.getDate())) {
+                idade--;
+            }
+
+            if (idade < 18) {
+                alert("Você deve ter pelo menos 18 anos para se cadastrar.");
+                return false;
+            }
+            window.location.href = 'listaBicicletas.php';
+            return true;
+        }
+    </script>
+    <style>
+        /* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f6f6;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #e67e22;
+}
+
+form {
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="date"],
+form button[type="submit"] {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+form button[type="submit"] {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+    background-color: #27ae60;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Locadores</h1>
+    <form name="form1" id="form1" method="post" action="cadastro_locador_exe.php" onsubmit="return validarDataNascimento();">
+        Nome:<br>
+        <input type="text" name="txtNome"><br>
+        Senha:<br>
+        <input type="password" name="senha"><br>
+        CPF:<br>
+        <input type="text" name="txtCPF"><br>
+        Data de Nascimento:<br>
+        <input type="date" name="dt_nascimento"><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
